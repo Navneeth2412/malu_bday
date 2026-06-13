@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Malu 🎂</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0b0b10;
+  --bg2:#13131c;
+  --bg3:#1a1a26;
+  --border:rgba(255,255,255,.08);
+  --border2:rgba(255,255,255,.14);
+  --text:#f0effe;
+  --muted:#666;
+  --muted2:#888;
+  --purple:#7F77DD;
+  --purpled:#3C3489;
+  --purplel:#EEEDFE;
+  --teal:#1D9E75;
+  --teall:#E1F5EE;
+  --coral:#D85A30;
+  --corl:#FAECE7;
+  --pink:#D4537E;
+  --pinkl:#FBEAF0;
+  --amber:#BA7517;
+  --amberl:#FAEEDA;
+  --green:#639922;
+  --greenl:#EAF3DE;
+  --red:#E24B4A;
+  --redl:#FCEBEB;
+  --r:14px;
+}
+
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
+
+/* ── UTILS ── */
+.serif{font-family:'DM Serif Display',serif;}
+.hide{display:none!important;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:50px;border:none;font-size:15px;font-weight:500;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;letter-spacing:.01em;}
+.btn-primary{background:var(--purple);color:#fff;}
+.btn-primary:hover{background:var(--purpled);transform:translateY(-1px);}
+.btn-ghost{background:rgba(255,255,255,.07);color:var(--muted2);border:.5px solid var(--border2);}
+.btn-ghost:hover{background:rgba(255,255,255,.13);color:var(--text);}
+.g-title{font-size:24px;font-weight:500;color:var(--text);margin-bottom:6px;}
+.g-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7;}
+
+/* ── SCREENS ── */
+.screen{display:none;min-height:100vh;flex-direction:column;}
+.screen.on{display:flex;}
+
+/* ════════ LANDING ════════ */
+#s-land{align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden;}
+#land-canvas{position:absolute;inset:0;pointer-events:none;}
+.land-inner{position:relative;z-index:2;max-width:520px;}
+.land-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin-bottom:24px;opacity:.8;}
+.land-title{font-size:clamp(52px,10vw,80px);font-weight:300;color:var(--text);line-height:1.0;margin-bottom:6px;}
+.land-title em{font-style:italic;color:rgba(175,169,236,.7);}
+.land-name{font-size:clamp(52px,10vw,80px);font-weight:300;color:var(--purple);line-height:1.0;margin-bottom:32px;}
+.land-sub{font-size:16px;color:var(--muted);margin-bottom:48px;line-height:1.8;}
+
+/* ════════ MENU ════════ */
+#s-menu{padding:0;}
+.menu-top{padding:48px 36px 36px;border-bottom:.5px solid var(--border);}
+.menu-tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;opacity:.8;}
+.menu-hl{font-size:clamp(28px,5vw,40px);font-weight:300;color:var(--text);line-height:1.15;margin-bottom:6px;}
+.menu-sub{font-size:14px;color:var(--muted);}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;flex:1;}
+.game-tile{
+  padding:28px 28px 24px;border-right:.5px solid var(--border);border-bottom:.5px solid var(--border);
+  cursor:pointer;transition:background .15s;display:flex;flex-direction:column;gap:10px;
+  text-decoration:none;
+}
+.game-tile:nth-child(even){border-right:none;}
+.game-tile:hover{background:var(--bg2);}
+.gt-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.gt-name{font-size:15px;font-weight:500;color:var(--text);}
+.gt-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+.gt-pill{display:inline-block;padding:3px 10px;border-radius:50px;font-size:11px;letter-spacing:.04em;margin-top:2px;}
+.gt-best{font-size:12px;color:#444;margin-top:2px;}
+.menu-footer{padding:20px 36px;border-top:.5px solid var(--border);display:flex;align-items:center;gap:12px;}
+.mf-label{font-size:13px;color:var(--muted);flex:1;}
+.total-score{font-size:15px;font-weight:500;color:var(--purple);}
+
+/* ════════ GAME SHELL ════════ */
+#s-game{padding:0;}
+.game-bar{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 24px;border-bottom:.5px solid var(--border);
+  position:sticky;top:0;background:var(--bg);z-index:10;
+}
+.back-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;background:var(--bg2);border:none;color:var(--muted2);font-size:13px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.back-btn:hover{background:var(--bg3);color:var(--text);}
+.bar-title{font-size:15px;font-weight:500;color:var(--text);}
+.bar-score{margin-left:auto;font-size:13px;color:var(--purple);font-weight:500;background:rgba(127,119,221,.12);padding:5px 12px;border-radius:50px;}
+#game-body{padding:36px 32px;max-width:680px;margin:0 auto;width:100%;}
+
+/* ── memory ── */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
+.mc{aspect-ratio:1;border-radius:12px;background:var(--bg2);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;transition:all .18s;user-select:none;font-family:'DM Serif Display',serif;}
+.mc:hover{background:var(--bg3);}
+.mc.flip{background:#1e1b3a;border-color:rgba(127,119,221,.4);}
+.mc.matched{background:rgba(29,158,117,.15);border-color:rgba(29,158,117,.4);cursor:default;}
+.mc.wrong{background:rgba(226,75,74,.12);border-color:rgba(226,75,74,.3);}
+.stat-row{display:flex;gap:12px;margin-bottom:24px;}
+.stat-box{flex:1;background:var(--bg2);border-radius:10px;padding:12px 16px;text-align:center;border:.5px solid var(--border);}
+.stat-val{font-size:22px;font-weight:500;color:var(--text);}
+.stat-lab{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:.05em;text-transform:uppercase;}
+
+/* ── scramble ── */
+.scr-word{font-size:38px;font-weight:300;letter-spacing:.2em;text-align:center;padding:28px;background:var(--bg2);border-radius:14px;border:.5px solid var(--border);margin:0 0 12px;color:var(--text);}
+.scr-hint{font-size:13px;color:var(--muted);text-align:center;margin-bottom:20px;}
+.scr-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.so{padding:14px;border-radius:10px;background:var(--bg2);border:.5px solid var(--border);color:var(--muted2);font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:center;transition:all .15s;}
+.so:hover{background:var(--bg3);color:var(--text);}
+.so.correct{background:rgba(29,158,117,.15);border-color:rgba(29,158,117,.4);color:#9FE1CB;}
+.so.wrong{background:rgba(226,75,74,.1);border-color:rgba(226,75,74,.3);color:#F7C1C1;}
+.pips{display:flex;gap:6px;margin-bottom:20px;}
+.pip{height:3px;flex:1;border-radius:2px;background:var(--bg3);}
+.pip.on{background:var(--purple);}
+
+/* ── hilo ── */
+.hl-big{font-size:72px;font-weight:300;text-align:center;padding:28px 0;line-height:1;}
+.hl-label{font-size:13px;color:var(--muted);text-align:center;margin-bottom:24px;}
+.hl-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.hl-btn{padding:20px;border-radius:12px;border:none;font-size:20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .15s;}
+.hl-h{background:rgba(29,158,117,.18);color:#9FE1CB;}
+.hl-h:hover{background:rgba(29,158,117,.28);}
+.hl-l{background:rgba(212,83,126,.15);color:#ED93B1;}
+.hl-l:hover{background:rgba(212,83,126,.25);}
+.hl-streak{text-align:center;font-size:14px;color:var(--muted);}
+.hl-streak b{color:var(--purple);}
+
+/* ── whack ── */
+.wh-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.wh-hole{aspect-ratio:1;border-radius:14px;background:var(--bg2);border:.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:34px;cursor:pointer;transition:all .12s;user-select:none;}
+.wh-hole:hover{background:var(--bg3);}
+.wh-hole.active{background:rgba(127,119,221,.15);border-color:rgba(127,119,221,.4);}
+.wh-hole.hit{background:rgba(29,158,117,.15);border-color:rgba(29,158,117,.4);}
+.wh-hole.miss{background:rgba(226,75,74,.1);border-color:rgba(226,75,74,.3);}
+.wh-timer{height:5px;background:var(--bg2);border-radius:3px;overflow:hidden;margin-bottom:16px;}
+.wh-fill{height:100%;background:var(--purple);border-radius:3px;transition:width .1s linear;}
+.wh-hud{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:16px;}
+.wh-hud b{color:var(--text);}
+
+/* ── result card ── */
+.result{background:var(--bg2);border:.5px solid var(--border);border-radius:14px;padding:24px;text-align:center;margin-bottom:20px;}
+.result-big{font-size:48px;font-weight:300;color:var(--text);margin-bottom:4px;}
+.result-label{font-size:13px;color:var(--muted);}
+.result-btns{display:flex;gap:10px;}
+
+/* ════════ LETTER ════════ */
+#s-letter{padding:0;}
+.letter-wrap{max-width:640px;margin:0 auto;padding:48px 32px;}
+.ltr-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);margin-bottom:20px;opacity:.8;}
+.ltr-heading{font-size:clamp(28px,5vw,40px);font-weight:300;color:var(--text);margin-bottom:32px;line-height:1.2;}
+.ltr-card{background:var(--bg2);border:.5px solid var(--border);border-radius:16px;padding:36px;}
+.ltr-from{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:24px;opacity:.7;}
+.ltr-body{font-size:16px;color:rgba(255,255,255,.8);line-height:1.95;}
+.ltr-body p+p{margin-top:16px;}
+.ltr-placeholder{background:rgba(127,119,221,.1);border-left:2px solid var(--purple);border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:14px;color:rgba(175,169,236,.8);font-style:italic;line-height:1.7;}
+.ltr-sign{margin-top:28px;font-size:15px;color:var(--muted);border-top:.5px solid var(--border);padding-top:20px;}
+.ltr-footer{margin-top:32px;display:flex;gap:12px;align-items:center;}
+
+/* ════════ PHOTO ALBUM ════════ */
+#s-album{padding:0;}
+.album-hero{padding:56px 36px 48px;border-bottom:.5px solid var(--border);text-align:center;}
+.album-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;opacity:.7;}
+.album-title{font-size:clamp(36px,7vw,64px);font-weight:300;color:var(--text);line-height:1.1;margin-bottom:12px;}
+.album-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:420px;margin:0 auto 32px;}
+.album-years{display:inline-flex;gap:6px;padding:10px 20px;background:var(--bg2);border:.5px solid var(--border);border-radius:50px;font-size:13px;color:var(--muted);}
+.album-years b{color:var(--purple);}
+.album-grid{padding:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto;width:100%;}
+.photo-slot{border-radius:14px;overflow:hidden;position:relative;background:var(--bg2);border:.5px solid var(--border);aspect-ratio:1;cursor:pointer;transition:all .2s;}
+.photo-slot:hover{border-color:var(--border2);transform:translateY(-2px);}
+.photo-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-slot .ph-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--bg2);transition:opacity .2s;}
+.photo-slot .ph-overlay.has-img{opacity:0;}
+.photo-slot:hover .ph-overlay.has-img{opacity:1;background:rgba(11,11,16,.7);}
+.ph-icon{font-size:28px;color:rgba(255,255,255,.2);}
+.ph-label{font-size:12px;color:var(--muted);text-align:center;padding:0 12px;line-height:1.5;}
+.photo-slot .photo-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(11,11,16,.9));padding:24px 14px 12px;font-size:12px;color:rgba(255,255,255,.7);transform:translateY(100%);transition:transform .2s;}
+.photo-slot:hover .photo-caption{transform:translateY(0);}
+.album-big{grid-column:span 2;aspect-ratio:16/9;}
+.album-footer{padding:40px 36px;border-top:.5px solid var(--border);text-align:center;}
+.af-msg{font-size:clamp(18px,3vw,26px);font-weight:300;color:var(--text);line-height:1.6;max-width:480px;margin:0 auto 28px;}
+.af-msg em{color:var(--purple);font-style:italic;}
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:100;}
+.cf{position:absolute;border-radius:2px;animation:cffall linear forwards;}
+@keyframes cffall{0%{transform:translateY(-20px) rotate(0) scaleX(1);opacity:1}50%{transform:translateY(50vh) rotate(360deg) scaleX(.5);opacity:.9}100%{transform:translateY(110vh) rotate(720deg) scaleX(1);opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- ══ LANDING ══ -->
+<div class="screen on" id="s-land">
+  <canvas id="land-canvas"></canvas>
+  <div class="land-inner">
+    <div class="land-eyebrow">🐾 21st birthday · june 2026</div>
+    <div class="land-title serif"><em>Happy</em></div>
+    <div class="land-name serif">Birthday,<br>Malu.</div>
+    <div class="land-sub">A few games, a letter, and Jo & Rio's seal of approval.<br>And something waiting at the end.</div>
+    <button class="btn btn-primary" onclick="GO('menu')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Begin
+    </button>
+  </div>
+</div>
+
+<!-- ══ MENU ══ -->
+<div class="screen" id="s-menu">
+  <div class="menu-top">
+    <div class="menu-tag">🐾 Malu's birthday arcade</div>
+    <div class="menu-hl serif">Pick a game,<br>Pashu.</div>
+    <div class="menu-sub"></div>
+  </div>
+  <div class="menu-grid" id="menu-grid"></div>
+  <div class="menu-footer">
+    <div class="mf-label">Total score across all games</div>
+    <div class="total-score" id="total-score">0 pts</div>
+    <button class="btn btn-primary" onclick="GO('letter')" id="unlock-btn" style="display:none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Open the letter
+    </button>
+  </div>
+</div>
+
+<!-- ══ GAME SHELL ══ -->
+<div class="screen" id="s-game">
+  <div class="game-bar">
+    <button class="back-btn" onclick="GO('menu')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Menu
+    </button>
+    <span class="bar-title" id="bar-title"></span>
+    <span class="bar-score hide" id="bar-score">0</span>
+  </div>
+  <div id="game-body"></div>
+</div>
+
+<!-- ══ LETTER ══ -->
+<div class="screen" id="s-letter">
+  <div class="letter-wrap">
+    <div class="ltr-eyebrow">For Malu · Personal</div>
+    <div class="ltr-heading serif">A letter from<br>your sibling.</div>
+    <div class="ltr-card">
+      <div class="ltr-from">Written by the great A10</div>
+      <div class="ltr-body">
+        <p>Dear Malu,</p>
+        <p>idh oru birthday kathu anu. idhindathu there is birthday message. so happy birthday. thats all i have to say.</p>
+        <p>saaj moote chute moote 🐾</p>
+      </div>
+      <div class="ltr-sign">— your A10 ✦</div>
+    </div>
+    <div class="ltr-footer">
+      <button class="btn btn-ghost" onclick="GO('menu')">Back to games</button>
+      <button class="btn btn-primary" onclick="GO('album')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        See the photo album
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PHOTO ALBUM ══ -->
+<div class="screen" id="s-album">
+  <div class="confetti-wrap hide" id="cfw"></div>
+  <div class="album-hero">
+    <div class="album-eyebrow">🐾 Photo album · 21 years</div>
+    <div class="album-title serif">all you,<br>through the years.</div>
+    <div class="album-sub">Every photo here is a moment worth keeping.</div>
+    <div class="album-years">🐱 &nbsp;<b>21</b>&nbsp; </div>
+  </div>
+  <div class="album-grid" id="album-grid"></div>
+  <div class="album-footer">
+    <div class="af-msg serif">"saaj moote, chute moote 🐾"</div>
+    <button class="btn btn-ghost" onclick="GO('menu')">Back to menu</button>
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+const scores={};
+const GLIST=[
+  {id:'memory', name:'Memory', desc:'Match all pairs. Fewest moves wins.', tag:'Focus', tc:'rgba(127,119,221,.15)', tt:'#AFA9EC', ic:'#534AB7', ib:'rgba(83,74,183,.15)', emoji:'◈'},
+  {id:'scramble', name:'Word scramble', desc:'Unscramble the word before time runs out.', tag:'Words', tc:'rgba(29,158,117,.15)', tt:'#9FE1CB', ic:'#1D9E75', ib:'rgba(29,158,117,.15)', emoji:'✦'},
+  {id:'hilo', name:'Higher or lower', desc:'Guess if the next number is bigger.', tag:'Luck', tc:'rgba(212,83,126,.15)', tt:'#ED93B1', ic:'#D4537E', ib:'rgba(212,83,126,.15)', emoji:'❋'},
+  {id:'whack', name:'Whack-a-cat', desc:'30 seconds. Tap every cat you see.', tag:'Reflex', tc:'rgba(186,117,23,.15)', tt:'#FAC775', ic:'#BA7517', ib:'rgba(186,117,23,.15)', emoji:'🐱'},
+];
+
+/* ════════════════════════════════════════════════════
+   EDIT ME — PHOTOS
+   For each photo below, put an image file in the SAME
+   FOLDER as this HTML file, and set "src" to its filename.
+   Example: src: 'pic_1.jpg'
+   You can rename the "caption" text to whatever you like.
+   ════════════════════════════════════════════════════ */
+const PHOTOS=[
+  {src:'pic_1.jpg', caption:''},
+  {src:'pic_2.jpg', caption:''},
+  {src:'pic_3.jpg', caption:''},
+  {src:'pic_4.jpg', caption:''},
+  {src:'pic_5.jpg', caption:''},
+  {src:'pic_6.jpg', caption:''},
+  {src:'pic_7.jpg', caption:''},
+];
+
+function GO(screen, gameId){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s-'+screen).classList.add('on');
+  window.scrollTo(0,0);
+  if(screen==='menu') buildMenu();
+  if(screen==='game' && gameId) startGame(gameId);
+  if(screen==='album') buildAlbum();
+}
+
+// ── MENU ──
+function buildMenu(){
+  const g=document.getElementById('menu-grid');
+  g.innerHTML='';
+  GLIST.forEach(gm=>{
+    const d=document.createElement('div');
+    d.className='game-tile';
+    const best=scores[gm.id]!==undefined?`Best: ${scores[gm.id]} pts`:'Not played yet';
+    d.innerHTML=`<div class="gt-icon" style="background:${gm.ib};color:${gm.ic};font-size:20px;">${gm.emoji}</div>
+<div class="gt-name">${gm.name}</div>
+<div class="gt-desc">${gm.desc}</div>
+<div class="gt-pill" style="background:${gm.tc};color:${gm.tt}">${gm.tag}</div>
+<div class="gt-best">${best}</div>`;
+    d.onclick=()=>GO('game',gm.id);
+    g.appendChild(d);
+  });
+  // letter tile
+  const lt=document.createElement('div');
+  lt.className='game-tile';
+  const lPlayed=scores['letter'];
+  lt.innerHTML=`<div class="gt-icon" style="background:rgba(212,83,126,.15);color:#D4537E;font-size:20px;">♥</div>
+<div class="gt-name">Birthday letter</div>
+<div class="gt-desc">A message saved just for Malu.</div>
+<div class="gt-pill" style="background:rgba(212,83,126,.12);color:#ED93B1">Personal</div>
+<div class="gt-best">${lPlayed?'Read ✓':'Waiting for you'}</div>`;
+  lt.onclick=()=>GO('letter');
+  g.appendChild(lt);
+
+  const total=Object.values(scores).reduce((a,b)=>typeof b==='number'?a+b:a,0);
+  document.getElementById('total-score').textContent=total+' pts';
+  const played=GLIST.filter(g=>scores[g.id]!==undefined).length;
+  if(played>=3) document.getElementById('unlock-btn').style.display='';
+  else document.getElementById('unlock-btn').style.display='none';
+}
+
+// ── GAME SHELL ──
+let whackIv=null, whackTimerIv=null;
+function startGame(id){
+  const gm=GLIST.find(g=>g.id===id);
+  document.getElementById('bar-title').textContent=gm.name;
+  document.getElementById('bar-score').textContent='';
+  document.getElementById('bar-score').classList.add('hide');
+  if(whackIv){clearTimeout(whackIv);whackIv=null;}
+  if(whackTimerIv){clearInterval(whackTimerIv);whackTimerIv=null;}
+  const b=document.getElementById('game-body');
+  b.innerHTML='';
+  ({memory:initMemory,scramble:initScramble,hilo:initHiLo,whack:initWhack})[id](b);
+}
+
+function setSc(id,val){
+  if(scores[id]===undefined||val>scores[id]) scores[id]=val;
+  const el=document.getElementById('bar-score');
+  el.textContent=val+' pts';el.classList.remove('hide');
+}
+
+function resultHTML(big,label){
+  return `<div class="result"><div class="result-big">${big}</div><div class="result-label">${label}</div></div>`;
+}
+function resultBtns(gameId){
+  return `<div class="result-btns"><button class="btn btn-primary" onclick="startGame('${gameId}')">Play again</button><button class="btn btn-ghost" onclick="GO('menu')">Menu</button></div>`;
+}
+
+// ── MEMORY ──
+function initMemory(c){
+  const syms=['🐱','🐾','🐟','🧶','🐈','🥛','🎀','😼'];
+  let deck=[...syms,...syms].sort(()=>Math.random()-.5);
+  let flipped=[],matched=0,moves=0,lock=false,start=null,tiv=null;
+  c.innerHTML=`<div class="g-title">Memory</div><div class="g-sub">Match all 8 pairs. Fewest moves wins.</div>
+<div class="stat-row">
+  <div class="stat-box"><div class="stat-val" id="mm">0</div><div class="stat-lab">Moves</div></div>
+  <div class="stat-box"><div class="stat-val" id="mp">0/8</div><div class="stat-lab">Pairs</div></div>
+  <div class="stat-box"><div class="stat-val" id="mt">0s</div><div class="stat-lab">Time</div></div>
+</div>
+<div class="mem-grid" id="mgrid"></div>`;
+  const grid=document.getElementById('mgrid');
+  deck.forEach((sym,i)=>{
+    const card=document.createElement('div');
+    card.className='mc';card.dataset.s=sym;card.textContent='';
+    card.onclick=()=>{
+      if(lock||card.classList.contains('matched')||flipped.includes(card))return;
+      if(!start){start=Date.now();tiv=setInterval(()=>{document.getElementById('mt').textContent=Math.round((Date.now()-start)/1000)+'s';},300);}
+      card.textContent=sym;card.classList.add('flip');flipped.push(card);
+      if(flipped.length===2){
+        moves++;document.getElementById('mm').textContent=moves;lock=true;
+        if(flipped[0].dataset.s===flipped[1].dataset.s){
+          flipped.forEach(c=>c.classList.replace('flip','matched'));
+          matched++;document.getElementById('mp').textContent=matched+'/8';
+          flipped=[];lock=false;
+          if(matched===8){clearInterval(tiv);const t=Math.round((Date.now()-start)/1000);const pts=Math.max(10,300-moves*8-t*2);setSc('memory',pts);c.innerHTML+=resultHTML(moves+' moves','in '+t+'s · '+pts+' pts')+resultBtns('memory');}
+        } else {
+          setTimeout(()=>{flipped.forEach(c=>{c.textContent='';c.classList.remove('flip','wrong');});flipped=[];lock=false;},700);
+        }
+      }
+    };
+    grid.appendChild(card);
+  });
+}
+
+// ── SCRAMBLE ──
+function initScramble(c){
+  const ws=[
+    {w:'MALU',h:'Your name — easy warm-up'},
+    {w:'PASHU',h:'A beloved nickname (ask your sibling)'},
+    {w:'JO',h:'One of the two cats'},
+    {w:'RIO',h:'The other cat'},
+    {w:'DANCE',h:'What she does at Prayaag club'},
+    {w:'BIRTHDAY',h:'What today is, in case you forgot'},
+    {w:'TWENTY',h:'21 minus one'},
+    {w:'WHISKERS',h:'Something every good cat has'},
+    {w:'PRAYAAG',h:'The best dance club ever'},
+  ];
+  let idx=0,sc=0;
+  const wrong=['DREAM','RIVER','FLAME','CLOUD','STORM','LIGHT','HEART','GRACE','MITTENS','PAWPRINT'];
+  function scr(w){let a=w.split('');for(let i=a.length-1;i>0;i--){const j=~~(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a.join('');}
+  function render(){
+    if(idx>=ws.length){setSc('scramble',sc);c.innerHTML=`<div class="g-title">Word scramble</div>${resultHTML(sc+'/'+ws.length,'words unscrambled')}${resultBtns('scramble')}`;return;}
+    const cur=ws[idx];let s=scr(cur.w);while(s===cur.w)s=scr(cur.w);
+    const opts=[cur.w,...wrong.filter(x=>x!==cur.w).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5);
+    c.innerHTML=`<div class="g-title">Word scramble</div><div class="g-sub">Unscramble the word.</div>
+<div class="pips">${ws.map((_,i)=>`<div class="pip${i<idx?' on':''}"></div>`).join('')}</div>
+<div class="scr-word">${s}</div><div class="scr-hint">${cur.h}</div>
+<div class="scr-opts" id="sopts"></div>
+<div style="font-size:13px;color:var(--muted);text-align:center;">${idx+1} of ${ws.length}</div>`;
+    document.getElementById('sopts').append(...opts.map(o=>{
+      const b=document.createElement('button');b.className='so';b.textContent=o;
+      b.onclick=()=>{
+        document.querySelectorAll('.so').forEach(x=>x.style.pointerEvents='none');
+        if(o===cur.w){b.classList.add('correct');sc++;setSc('scramble',Math.round(sc/ws.length*100));}
+        else{b.classList.add('wrong');document.querySelectorAll('.so').forEach(x=>{if(x.textContent===cur.w)x.classList.add('correct');});}
+        setTimeout(()=>{idx++;render();},900);
+      };
+      return b;
+    }));
+  }
+  render();
+}
+
+// ── HILO ──
+function initHiLo(c){
+  let cur=~~(Math.random()*100)+1,streak=0,best=0,feedback='';
+  window._hlGuess=function(higher){
+    const next=~~(Math.random()*100)+1;
+    const ok=(higher&&next>cur)||(!higher&&next<cur)||next===cur;
+    if(ok){streak++;if(streak>best){best=streak;setSc('hilo',best*15);}}
+    else{streak=0;}
+    feedback=ok?'correct':'wrong';
+    cur=next;render();
+  };
+  function render(){
+    c.innerHTML=`<div class="g-title">Higher or lower</div><div class="g-sub">Will the next number be higher or lower than this?</div>
+<div style="background:var(--bg2);border:.5px solid var(--border);border-radius:14px;padding:28px;text-align:center;margin-bottom:8px;">
+  <div class="hl-big">${cur}</div>
+  <div class="hl-label">out of 100</div>
+</div>
+${feedback?`<div style="text-align:center;margin-bottom:14px;font-size:14px;color:${feedback==='correct'?'#9FE1CB':'#F7C1C1'};font-weight:500;">${feedback==='correct'?'✓ Correct!':'✗ Wrong!'}</div>`:'<div style="height:30px"></div>'}
+<div class="hl-btns">
+  <button class="hl-btn hl-h" onclick="_hlGuess(true)">▲ Higher</button>
+  <button class="hl-btn hl-l" onclick="_hlGuess(false)">▼ Lower</button>
+</div>
+<div class="hl-streak">Streak: <b>${streak}</b> &nbsp;·&nbsp; Best: <b>${best}</b></div>`;
+  }
+  render();
+}
+
+// ── WHACK ──
+function initWhack(c){
+  let sc=0,timeLeft=30,active=null;
+  const syms=['🐱','🐈','😼','🐾','🙀'];
+  c.innerHTML=`<div class="g-title">Whack-a-cat</div><div class="g-sub">30 seconds. Tap every cat before it disappears.</div>
+<div class="wh-hud"><span>Score: <b id="wscore">0</b></span><span>Time: <b id="wtime">30s</b></span></div>
+<div class="wh-timer"><div class="wh-fill" id="wfill"></div></div>
+<div class="wh-grid" id="wgrid"></div>`;
+  const grid=document.getElementById('wgrid');
+  for(let i=0;i<9;i++){
+    const h=document.createElement('div');h.className='wh-hole';h.dataset.i=i;h.textContent='';
+    h.onclick=()=>{if(!h.classList.contains('active'))return;clearTimeout(whackIv);h.classList.remove('active');h.classList.add('hit');h.textContent='';sc++;document.getElementById('wscore').textContent=sc;setTimeout(()=>{h.classList.remove('hit');if(timeLeft>0)next();},200);};
+    grid.appendChild(h);
+  }
+  function next(){
+    if(active){active.classList.remove('active');active.textContent='';}
+    if(timeLeft<=0)return;
+    const holes=grid.querySelectorAll('.wh-hole');
+    const h=holes[~~(Math.random()*holes.length)];
+    h.classList.add('active');h.textContent=syms[~~(Math.random()*syms.length)];
+    active=h;
+    whackIv=setTimeout(()=>{h.classList.remove('active');h.textContent='';if(timeLeft>0)next();},Math.max(450,1100-sc*35));
+  }
+  whackTimerIv=setInterval(()=>{
+    timeLeft--;
+    const tEl=document.getElementById('wtime');const fEl=document.getElementById('wfill');
+    if(tEl)tEl.textContent=timeLeft+'s';
+    if(fEl)fEl.style.width=(timeLeft/30*100)+'%';
+    if(timeLeft<=0){
+      clearInterval(whackTimerIv);clearTimeout(whackIv);
+      if(active){active.classList.remove('active');active.textContent='';}
+      const pts=sc*12;setSc('whack',pts);
+      c.innerHTML+=resultHTML(sc+' cats',pts+' pts')+resultBtns('whack');
+    }
+  },1000);
+  next();
+}
+
+// ── PHOTO ALBUM ──
+function buildAlbum(){
+  confetti();
+  const g=document.getElementById('album-grid');
+  g.innerHTML='';
+  PHOTOS.forEach((ph,i)=>{
+    const slot=document.createElement('div');
+    slot.className='photo-slot'+(i===0?' album-big':'');
+    slot.innerHTML=`<div class="ph-overlay" id="pho-${i}">
+  <div class="ph-icon">+</div>
+  <div class="ph-label">${ph.caption}<br><span style="color:#333;font-size:11px;">Add "${ph.src}" next to this file</span></div>
+</div>
+<img id="pimg-${i}" src="${ph.src}" alt="${ph.caption}" style="display:none;"
+  onload="this.style.display='block';document.getElementById('pho-${i}').classList.add('has-img')"
+  onerror="this.style.display='none'">
+<div class="photo-caption">${ph.caption}</div>`;
+    g.appendChild(slot);
+  });
+}
+
+function confetti(){
+  const cfw=document.getElementById('cfw');
+  cfw.classList.remove('hide');cfw.innerHTML='';
+  const cols=['#AFA9EC','#F0997B','#5DCAA5','#ED93B1','#FAC775','#85B7EB'];
+  for(let i=0;i<70;i++){
+    const d=document.createElement('div');d.className='cf';
+    const s=4+Math.random()*7;
+    d.style.cssText=`width:${s}px;height:${s+5}px;background:${cols[~~(Math.random()*cols.length)]};left:${Math.random()*100}%;top:-12px;animation-duration:${1.6+Math.random()*2}s;animation-delay:${Math.random()*1}s;`;
+    cfw.appendChild(d);
+  }
+  setTimeout(()=>cfw.classList.add('hide'),4000);
+}
+
+// ── LANDING CANVAS ──
+(function(){
+  const cv=document.getElementById('land-canvas');
+  const ctx=cv.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;stars=[];for(let i=0;i<120;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,a:Math.random(),da:(.002+Math.random()*.005)*(Math.random()<.5?1:-1)});}
+  resize();window.addEventListener('resize',resize);
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a+=s.da;if(s.a>1||s.a<0)s.da*=-1;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(175,169,236,${s.a*0.8})`;ctx.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+buildMenu();
+</script>
+</body>
+</html>
